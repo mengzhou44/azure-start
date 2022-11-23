@@ -1,10 +1,11 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import express, {Request, Response} from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import  usersRouter from './routes/users';
+
 const app = express();
-const usersRouter = require('./routes/users'); 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -13,14 +14,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /* GET home page. */
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('<h1>Hello World!</h1>')
 });
 
 app.use('/users', usersRouter)
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err: any, req: Request, res: Response) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -30,4 +31,5 @@ app.use(function(err, req, res, next) {
   res.send('error');
 });
 
-module.exports = app;
+
+export default app;
