@@ -10,6 +10,10 @@ router.get('/', function(req: Request, res: Response) {
     }, {
         id: 2, 
         name: 'smith'
+    },
+    {
+        id: 3, 
+        name: 'mike'
     }
 ]
   res.send(users);
